@@ -1,26 +1,33 @@
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
+import slugify from "slugify";
 const categorySchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   description: {
     type: String,
-    trim: true
+    trim: true,
   },
-  
+
   slug: {
     type: String,
     required: true,
     unique: true,
-    trim: true
-  }
-}, {
-  timestamps: true
+    trim: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const Category = mongoose.model('Category', categorySchema);
+categorySchema.pre("save", function (next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
+});
+
+const Category = mongoose.model("Category", categorySchema);
 
 export default Category;
