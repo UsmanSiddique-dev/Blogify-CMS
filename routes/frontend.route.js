@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import { index ,addComment,articleByCategories,author,search,singleArticle} from "../controllers/siteController";
 
 router.get('/', index)
 router.get('/category/:name', articleByCategories)
