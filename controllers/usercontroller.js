@@ -19,7 +19,10 @@ export const allUser = async (req, res) => {
 export const addUserPage = async (req, res) => {
   res.render("admin/users/create");
 };
-export const addUser = async (req, res) => {};
+export const addUser = async (req, res) => {
+ const user=UserModel.create(req.body)
+  res.redirect("/admin/users");
+};
 export const updateUserPage = async (req, res) => {
   res.render("admin/users/update");
 };
