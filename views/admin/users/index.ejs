@@ -8,7 +8,9 @@
         <a class="add-new" href="/admin/add-user">add user</a>
       </div>
       <div class="col-md-12">
-        <table class="content-table">
+        <div id="usersTable"></div>
+
+        <!-- <table class="content-table">
           <thead>
             <th>S.No.</th>
             <th>Full Name</th>
@@ -67,8 +69,8 @@
               </td>
             </tr>
           </tbody>
-        </table>
-        <nav>
+        </table> -->
+        <!-- <nav>
           <ul class="pagination">
             <li class="page-item disabled">
               <a class="page-link">Previous</a>
@@ -82,8 +84,59 @@
               <a class="page-link" href="#">Next</a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
       </div>
     </div>
   </div>
 </div>
+<script
+  type="text/javascript"
+  src="https://unpkg.com/tabulator-tables@6.5.0/dist/js/tabulator.min.js"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+  crossorigin="anonymous"
+></script>
+<script>
+  const tableData = <%- JSON.stringify(users) %>;
+  console.log(tableData);
+  const table = new Tabulator("#usersTable", {
+    data: tableData,
+    layout: "fitColumns",
+    pagination: "true",
+    paginationSize: 10,
+    paginationSizeSelector: [5, 10, 25,50,100],
+    columns: [
+      // { title: "ID", field: "id", sorter: "number" },
+      { title: "Full Name", field: "fullname", sorter: "string",headerFilter: "input" },
+      { title: "Username", field: "username", sorter: "string" ,headerFilter: "input" },
+      { title: "Role", field: "role", sorter: "string" ,headerFilter: "input"},
+      {
+        title: "Edit",
+        formatter: function (cell, formatterParams,onRendered) {
+          const id = cell.getRow().getData()._id;
+          return `<a href="/admin/update-user/${id}"><i class="fa fa-edit"></i></a>`;
+        },
+        hozAlign: "center",
+        width: 100,
+      },
+      {
+        title: "Delete",
+        formatter: function (cell, formatterParams) {
+          const id = cell.getRow().getData()._id;
+          return `<a href="/admin/delete-user/${id}"><i class="fa fa-trash-o"></i></a>`;
+        },
+        hozAlign: "center",
+        width: 100,
+      }
+    ],
+  });
+</script>
+
+<%- contentFor('tabulatorCSS') %>
+<link
+  href="https://unpkg.com/tabulator-tables@6.5.0/dist/css/tabulator.min.css"
+  rel="stylesheet"
+/>
+<link href="/css/tabulator_bootstrap5.min.css" rel="stylesheet" />

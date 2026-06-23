@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="/css/font-awesome.css" />
     <!-- Custom stlylesheet -->
     <link rel="stylesheet" href="/css/style.css" />
+   
+    <%- typeof tabulatorCSS !== 'undefined' ? tabulatorCSS : '' %>
   </head>
   <body>
     <!-- HEADER -->
@@ -69,7 +71,7 @@
     </div>
     <!-- /Menu Bar -->
 
-    <%- body  %>
+    <%- body %>
     <!-- Footer -->
     <div id="footer">
       <div class="container">

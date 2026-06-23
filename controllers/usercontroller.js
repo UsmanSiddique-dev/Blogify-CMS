@@ -14,13 +14,17 @@ export const settings = async (req, res) => {
   res.render("admin/settings");
 };
 export const allUser = async (req, res) => {
-  res.render("admin/users/index");
+  const users = await UserModel.find();
+
+  res.render("admin/users/index", {
+    users,
+  });
 };
 export const addUserPage = async (req, res) => {
   res.render("admin/users/create");
 };
 export const addUser = async (req, res) => {
- const user=UserModel.create(req.body)
+  const user = UserModel.create(req.body);
   res.redirect("/admin/users");
 };
 export const updateUserPage = async (req, res) => {
