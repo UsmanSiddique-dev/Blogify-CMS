@@ -28,7 +28,41 @@ export const addUser = async (req, res) => {
   res.redirect("/admin/users");
 };
 export const updateUserPage = async (req, res) => {
-  res.render("admin/users/update");
+  try {
+    const user = await UserModel.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    res.render("admin/users/update", {
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: "Internal server Error",
+    });
+  }
 };
-export const updateUser = async (req, res) => {};
+export const updateUser = async (req, res) => {
+  try {
+    const { fullname, password, role } = req.body;
+    const user = await UserModel.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    user.fullname = fullname || user.fullname;
+    if (password) {
+      user.password = password;
+    }
+
+    user.role = role || user.role;
+    await user.save();
+    res.render("admin/users");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: "Internal server Error",
+    });
+  }
+};
 export const deleteUser = async (req, res) => {};
