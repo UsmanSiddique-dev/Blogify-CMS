@@ -57,7 +57,7 @@ export const updateUser = async (req, res) => {
 
     user.role = role || user.role;
     await user.save();
-    res.render("admin/users");
+    res.redirect("/admin/users");
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -65,4 +65,18 @@ export const updateUser = async (req, res) => {
     });
   }
 };
-export const deleteUser = async (req, res) => {};
+export const deleteUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await UserModel.findByIdAndDelete(id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    res.redirect("/admin/users");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: "Internal server Error",
+    });
+  }
+};
