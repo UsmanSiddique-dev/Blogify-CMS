@@ -1,5 +1,4 @@
 import express from "express";
-import session from "express-session";
 import flash from "connect-flash";
 import expressLayout from "express-ejs-layouts";
 import mongoose from "mongoose";
@@ -8,10 +7,12 @@ import path from "path";
 import { configDotenv } from "dotenv";
 import adminRoutes from "./routes/admin.route.js";
 import frontendRoutes from "./routes/frontend.route.js";
+import cookieParser from "cookie-parser";
 configDotenv();
 
 // ... rest of your code
 const app = express();
+app.use(cookieParser());
 
 // Middleware
 app.use(express.json());
