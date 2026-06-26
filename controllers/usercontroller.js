@@ -24,7 +24,7 @@ export const adminLogin = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" },
     );
-    res.cookie("token", token, { httpOnly: true ,maxAge: 3600000}); // 1 hour
+    res.cookie("token", token, { httpOnly: true, maxAge: 3600000 }); // 1 hour
     res.redirect("/admin/dashboard");
   } catch (error) {
     console.log(error);
@@ -33,7 +33,10 @@ export const adminLogin = async (req, res) => {
     });
   }
 };
-export const logout = async (req, res) => {};
+export const logout = async (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/admin");
+};
 export const dashboardPage = async (req, res) => {
   res.render("admin/dashboard");
 };
