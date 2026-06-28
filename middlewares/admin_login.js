@@ -12,7 +12,8 @@ export const adminLogin = async (req, res, next) => {
       process.env.JWT_SECRET,
     );
     req.role=tokenData.role
-    req.user = tokenData;
+    req.fullname = tokenData.fullname;
+    
     next();
   } catch (error) {
     res.status(401).send("Unauthorized invalid token");

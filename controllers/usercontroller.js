@@ -36,22 +36,29 @@ export const adminLogin = async (req, res) => {
 export const logout = async (req, res) => {
   res.clearCookie("token");
   res.redirect("/admin");
+  
 };
 export const dashboardPage = async (req, res) => {
-  res.render("admin/dashboard");
+  res.render("admin/dashboard", {
+    role: req.role,
+    fullname:req.fullname
+  });
 };
 export const settings = async (req, res) => {
-  res.render("admin/settings");
+  res.render("admin/settings", { role: req.role });
 };
 export const allUser = async (req, res) => {
   const users = await UserModel.find();
 
   res.render("admin/users/index", {
     users,
+    role: req.role,
   });
 };
 export const addUserPage = async (req, res) => {
-  res.render("admin/users/create");
+  res.render("admin/users/create", {
+    role: req.role,
+  });
 };
 export const addUser = async (req, res) => {
   const user = UserModel.create(req.body);
@@ -65,6 +72,7 @@ export const updateUserPage = async (req, res) => {
     }
     res.render("admin/users/update", {
       user,
+      role: req.role,
     });
   } catch (error) {
     console.log(error);
