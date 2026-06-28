@@ -21,7 +21,7 @@ router.get("/update-user/:id", adminLogin,isAdmin, userController.updateUserPage
 router.post("/update-user/:id", adminLogin,isAdmin, userController.updateUser);
 router.get("/delete-user/:id", adminLogin,isAdmin, userController.deleteUser);
 
-// CAtregory
+// Catregory
 router.get("/category",adminLogin,isAdmin, categoryController.allCategory);
 
 router.get("/add-category",adminLogin,isAdmin, categoryController.addCategoryPage);
@@ -29,7 +29,7 @@ router.post("/add-category", adminLogin,isAdmin,categoryController.addCategory);
 router.get("/update-category/:id",adminLogin,isAdmin, categoryController.updateCategoryPage);
 router.post("/update-category/:id",adminLogin,isAdmin, categoryController.updateCategory);
 router.get("/delete-category/:id",adminLogin,isAdmin, categoryController.deleteCategory);
-``
+
 // Article
 router.get("/article",adminLogin, articleController.allArticle);
 

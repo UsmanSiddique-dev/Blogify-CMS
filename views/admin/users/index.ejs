@@ -109,6 +109,8 @@
     paginationSizeSelector: [5, 10, 25,50,100],
     columns: [
       // { title: "ID", field: "id", sorter: "number" },
+      { title: "ID", field: "id", sorter: "number" ,formatter: "rownum" , width: 70 ,hozAlign: "center"},
+
       { title: "Full Name", field: "fullname", sorter: "string",headerFilter: "input" },
       { title: "Username", field: "username", sorter: "string" ,headerFilter: "input" },
       { title: "Role", field: "role", sorter: "string" ,headerFilter: "input"},
@@ -132,7 +134,6 @@
       }
     ],
   });
-
 </script>
 
 <%- contentFor('tabulatorCSS') %>
