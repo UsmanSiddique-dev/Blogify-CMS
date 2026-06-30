@@ -109,6 +109,8 @@
     paginationSizeSelector: [5, 10, 25,50,100],
     columns: [
       // { title: "ID", field: "id", sorter: "number" },
+      { title: "S.No", field: "title", sorter: "string",headerFilter: "input", hozAlign:"center",width: 100,formatter: "rownum" },
+
       { title: "ID", field: "id", sorter: "number" ,formatter: "rownum" , width: 70 ,hozAlign: "center"},
 
       { title: "Full Name", field: "fullname", sorter: "string",headerFilter: "input" },

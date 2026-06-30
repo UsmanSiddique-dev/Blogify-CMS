@@ -27,12 +27,12 @@
   const table = new Tabulator("#categoriesTable", {
     data: tableData,
     layout: "fitColumns",
-    pagination: "true",
+    pagination: "true",   
     paginationSize: 10,
     paginationSizeSelector: [5, 10, 25,50,100],
     columns: [
-      { title: "ID", field: "id", sorter: "number" ,formatter: "rownum" , width: 70 ,hozAlign: "center"},
-      { title: "S.No", field: "title", sorter: "string",headerFilter: "input" },
+      
+      { title: "S.No", field: "title", sorter: "string",headerFilter: "input", hozAlign:"center",width: 100,formatter: "rownum" },
       { title: "Category Name", field: "title", sorter: "string",headerFilter: "input" },
       { title: "Slug", field: "slug", sorter: "string" ,headerFilter: "input" },
       {
